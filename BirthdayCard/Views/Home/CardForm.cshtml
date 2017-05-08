@@ -1,0 +1,13 @@
+﻿@model BirthdayCard.Models.Card
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm())
+{
+    <h2>Send a Birthday Card</h2>
+    @Html.ValidationSummary()
+    <p>From: @Html.TextBoxFor(t => t.From)</p>
+    <p>To: @Html.TextBoxFor(t => t.To)</p>
+    <p>Message: @Html.TextBoxFor(t => t.Message)</p>
+    <input type="submit" class="btn btn-success" value="Send Card">
+}

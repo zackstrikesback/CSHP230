@@ -1,0 +1,13 @@
+﻿@model BirthdayCard.Models.Card
+
+<!DOCTYPE html>
+
+@using (Html.BeginForm())
+{
+    <h2>Birthday Card Sent</h2>
+    <p>From: @Model.From</p>
+    <p>To: @Model.To</p>
+    <p>Message: @Model.Message</p>
+    <a href="/home/index"></a>
+    @Html.ActionLink("Home", "Index")
+}
