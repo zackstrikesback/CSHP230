@@ -10,6 +10,7 @@ namespace LearningCenter.Business
     public interface ICourseManager
     {
         CourseModel[] GetAll();
+        CourseModel GetClass(int id);
     }
     public class CourseModel
     {
@@ -39,6 +40,11 @@ namespace LearningCenter.Business
                                 Price = t.Price
                             })
                             .ToArray();
+        }
+        public CourseModel GetClass(int id)
+        {
+            var course = courseRepository.GetClass(id);
+            return new CourseModel { Id = course.Id, Name = course.Name, Description = course.Description, Price = course.Price };
         }
     }
 }

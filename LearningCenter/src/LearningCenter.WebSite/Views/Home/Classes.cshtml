@@ -16,9 +16,9 @@
         @foreach (var course in Model.Courses)
         {
             <tr>
-                <td>course.Name</td>
-                <td>course.Description</td>
-                <td>course.Price</td>
+                <td>@Html.DisplayFor(modelItem => course.Name)</td>
+                <td>@Html.DisplayFor(modelItem => course.Description)</td>
+                <td>@Html.DisplayFor(modelItem => course.Price)</td>
             </tr>
         }
     </tbody>

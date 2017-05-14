@@ -10,6 +10,7 @@ namespace LearningCenter.Repository
     {
         UserModel LogIn(string email, string password);
         UserModel Register(string email, string password);
+        UserModel GetUser(int id);
     }
 
     public class UserModel
@@ -50,5 +51,35 @@ namespace LearningCenter.Repository
 
             return new UserModel { Id = user.UserId, Name = user.UserEmail };
         }
+
+        public UserModel GetUser(int id)
+        {
+            var user = DatabaseAccessor.Instance.Users
+                .FirstOrDefault(t => t.UserId == id);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserModel { Id = user.UserId, Name = user.UserEmail };
+        }
+
+        //public AddClass(int UserId, int CourseId)
+        //{
+        //    var user = UserRepository.GetUser(UserId);
+
+        //    // Get the Class object from the database
+
+        //    var classToAdd = CourseRepository.GetClass(CourseId);
+
+        //    // Use entity framework to add classes to the user
+
+        //    user.Classes.Add(classToAdd);
+
+        //    // Save the changes to database
+
+        //    DatabaseAccessor.Instance.SaveChanges();
+        //}
     }
 }

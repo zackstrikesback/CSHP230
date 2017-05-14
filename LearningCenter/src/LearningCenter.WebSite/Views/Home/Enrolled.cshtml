@@ -1,4 +1,4 @@
-﻿@model LearningCenter.WebSite.Models.CourseModel
+﻿@model LearningCenter.WebSite.Models.CourseViewModel
 
 @{
     ViewBag.Title = "Student Classes";
@@ -13,8 +13,13 @@
         </tr>
     </thread>
     <tbody>
-        <tr>
-            <td></td>
-        </tr>
+        @foreach (var course in Model.Courses)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => course.Name)</td>
+                <td>@Html.DisplayFor(modelItem => course.Description)</td>
+                <td>@Html.DisplayFor(modelItem => course.Price)</td>
+            </tr>
+        }
     </tbody>
 </table>

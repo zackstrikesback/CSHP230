@@ -44,15 +44,15 @@ namespace LearningCenter.WebSite.Controllers
         public ActionResult Enrolled()
         {
             var classes = courseManager
-                                .GetAll()
-                                .Select(t =>
-                                    new LearningCenter.WebSite.Models.CourseModel
-                                    {
-                                        Id = t.Id,
-                                        Name = t.Name,
-                                        Description = t.Description,
-                                        Price = t.Price
-                                    }).ToArray();
+                                 .GetAll()
+                                 .Select(t =>
+                                     new LearningCenter.WebSite.Models.CourseModel
+                                     {
+                                         Id = t.Id,
+                                         Name = t.Name,
+                                         Description = t.Description,
+                                         Price = t.Price
+                                     }).ToArray();
 
             var model = new CourseViewModel
             {
@@ -80,15 +80,15 @@ namespace LearningCenter.WebSite.Controllers
             return View(model);
         }
         //[HttpPost]
-        //public ActionResult Enroll(LoginModel loginModel, string returnUrl)
+        //public ActionResult Enroll(LoginModel loginModel, Models.CourseModel courseModel)
         //{
         //    // Get the User object from the database
 
-        //    var user = userRepository.GetUser(userId);
+        //    var user = (LearningCenter.WebSite.Models.UserModel)Session["User"];
 
         //    // Get the Class object from the database
 
-        //    var classToAdd = classRepository.GetClass(classId);
+        //    var classToAdd = courseModel;
 
         //    // Use entity framework to add classes to the user
 

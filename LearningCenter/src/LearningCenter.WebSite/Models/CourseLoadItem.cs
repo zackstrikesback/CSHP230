@@ -5,10 +5,11 @@ using System.Web;
 
 namespace LearningCenter.WebSite.Models
 {
-    public class UserModel
+    public class CourseLoadItem
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public CourseModel[] Classes { get; set; }
+        public int UserId { get; set; }
+        public int ClassId { get; set; }
+        public int ClassPrice { get; set; }
     }
 }

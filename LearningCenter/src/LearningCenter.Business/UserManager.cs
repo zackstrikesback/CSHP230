@@ -11,6 +11,7 @@ namespace LearningCenter.Business
     {
         UserModel LogIn(string email, string password);
         UserModel Register(string email, string password);
+        UserModel GetUser(int id);
     }
 
     public class UserModel
@@ -43,6 +44,18 @@ namespace LearningCenter.Business
         public UserModel Register(string email, string password)
         {
             var user = userRepository.Register(email, password);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserModel { Id = user.Id, Name = user.Name };
+        }
+
+        public UserModel GetUser(int id)
+        {
+            var user = userRepository.GetUser(id);
 
             if (user == null)
             {

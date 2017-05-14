@@ -9,6 +9,7 @@ namespace LearningCenter.Repository
     public interface ICourseRepository
     {
         CourseModel[] GetAll();
+        CourseModel GetClass(int id);
     }
 
     public class CourseModel
@@ -32,6 +33,18 @@ namespace LearningCenter.Repository
                                             Price = t.ClassPrice
                                         })
             .ToArray();
+        }
+        public CourseModel GetClass(int id)
+        {
+            var course = DatabaseAccessor.Instance.Classes
+                .FirstOrDefault(t => t.ClassId == id);
+
+            if (course == null)
+            {
+                return null;
+            }
+
+            return new CourseModel { Id = course.ClassId, Name = course.ClassName, Description = course.ClassDescription, Price = course.ClassPrice};
         }
     }
 
