@@ -8,33 +8,30 @@ namespace LearningCenter.Repository
 {
     public interface ICourseRepository
     {
-        CourseModel[] Courses { get; }
-        CourseModel Course(int classId);
+        CourseModel[] GetAll();
     }
 
     public class CourseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
     }
 
     public class CourseRepository : ICourseRepository
     {
-        public CourseModel[] Courses
+        public CourseModel[] GetAll()
         {
-            get
-            {
-                return DatabaseAccessor.Instance.Classes
-                    .Select(t => new CourseModel { Id = t.ClassId, Name = t.ClassName }).ToArray();
-            }
-        }
-
-        public CourseModel Course(int classId)
-        {
-            var c = DatabaseAccessor.Instance.Classes.Where(t => t.ClassId == classId)
-                                                   .Select(t => new CourseModel { Id = t.ClassId, Name = t.ClassName })
-                                                   .First();
-            return c;
+            return DatabaseAccessor.Instance.Classes.Select(t =>
+                                        new CourseModel
+                                        {
+                                            Id = t.ClassId,
+                                            Name = t.ClassName,
+                                            Description = t.ClassDescription,
+                                            Price = t.ClassPrice
+                                        })
+            .ToArray();
         }
     }
 

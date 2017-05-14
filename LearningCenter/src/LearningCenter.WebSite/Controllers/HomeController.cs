@@ -11,8 +11,11 @@ namespace LearningCenter.WebSite.Controllers
     public class HomeController : Controller
     {
         private readonly ICourseManager courseManager;
-        public HomeController(ICourseManager courseManager)
+        private readonly IUserManager userManager;
+
+        public HomeController(IUserManager userManager, ICourseManager courseManager)
         {
+            this.userManager = userManager;
             this.courseManager = courseManager;
         }
         public ActionResult Index()
@@ -21,16 +24,80 @@ namespace LearningCenter.WebSite.Controllers
         }
         public ActionResult Classes()
         {
-            return View();
+            var classes = courseManager
+                                .GetAll()
+                                .Select(t =>
+                                    new LearningCenter.WebSite.Models.CourseModel
+                                    {
+                                        Id = t.Id,
+                                        Name = t.Name,
+                                        Description = t.Description,
+                                        Price = t.Price
+                                    }).ToArray();
+
+            var model = new CourseViewModel
+            {
+                Courses = classes
+            };
+            return View(model);
         }
         public ActionResult Enrolled()
         {
-            return View();
+            var classes = courseManager
+                                .GetAll()
+                                .Select(t =>
+                                    new LearningCenter.WebSite.Models.CourseModel
+                                    {
+                                        Id = t.Id,
+                                        Name = t.Name,
+                                        Description = t.Description,
+                                        Price = t.Price
+                                    }).ToArray();
+
+            var model = new CourseViewModel
+            {
+                Courses = classes
+            };
+            return View(model);
         }
         public ActionResult Enroll()
         {
-            return View();
+            var classes = courseManager
+                                .GetAll()
+                                .Select(t =>
+                                    new LearningCenter.WebSite.Models.CourseModel
+                                    {
+                                        Id = t.Id,
+                                        Name = t.Name,
+                                        Description = t.Description,
+                                        Price = t.Price
+                                    }).ToArray();
+
+            var model = new CourseViewModel
+            {
+                Courses = classes
+            };
+            return View(model);
         }
+        //[HttpPost]
+        //public ActionResult Enroll(LoginModel loginModel, string returnUrl)
+        //{
+        //    // Get the User object from the database
+
+        //    var user = userRepository.GetUser(userId);
+
+        //    // Get the Class object from the database
+
+        //    var classToAdd = classRepository.GetClass(classId);
+
+        //    // Use entity framework to add classes to the user
+
+        //    user.Classes.Add(classToAdd);
+
+        //    // Save the changes to database
+
+        //    databaseAccessor.SubmitChanges();
+        //}
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -45,12 +112,6 @@ namespace LearningCenter.WebSite.Controllers
             return View();
         }
 
-        private readonly IUserManager userManager;
-
-        public HomeController(IUserManager userManager)
-        {
-            this.userManager = userManager;
-        }
         public ActionResult LogIn()
         {
             return View();

@@ -9,21 +9,17 @@ namespace LearningCenter.Business
 {
     public interface ICourseManager
     {
-        CourseModel[] Courses { get; }
-        CourseModel Course(int courseId);
+        CourseModel[] GetAll();
     }
     public class CourseModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public CourseModel(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
     }
 
-    public class CourseManager
+    public class CourseManager : ICourseManager
     {
         private readonly ICourseRepository courseRepository;
 
@@ -32,17 +28,17 @@ namespace LearningCenter.Business
             this.courseRepository = courseRepository;
         }
 
-        public CourseModel[] All
+        public CourseModel[] GetAll()
         {
-            get
-            {
-                return courseRepository.Courses.Select(t => new CourseModel(t.Id, t.Name)).ToArray();
-            }
-        }
-        public CourseModel Course(int classId)
-        {
-            var courseModel = courseRepository.Course(classId);
-            return new CourseModel(courseModel.Id, courseModel.Name);
+            return courseRepository.GetAll().Select(t =>
+                            new CourseModel
+                            {
+                                Id = t.Id,
+                                Name = t.Name,
+                                Description = t.Description,
+                                Price = t.Price
+                            })
+                            .ToArray();
         }
     }
 }

@@ -9,11 +9,7 @@ namespace LearningCenter.WebSite.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        public CourseModel(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
     }
 }
